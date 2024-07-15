@@ -1,4 +1,4 @@
-package com.example.fptdictionary.app.tuvungtienganh;
+package com.example.fptdictionary.tuvungtienganh;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
