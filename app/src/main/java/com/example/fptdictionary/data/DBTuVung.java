@@ -4,9 +4,15 @@ import android.app.Activity;
 
 import android.content.Context;
 
+
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+
+import com.example.fptdictionary.model.TuVung;
+
+import java.util.ArrayList;
 
 
 public class DBTuVung extends SQLiteOpenHelper{
@@ -45,6 +51,50 @@ public class DBTuVung extends SQLiteOpenHelper{
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db = this.context.openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null);
+    }
+
+
+    public ArrayList<TuVung> getAllTuVung(){
+        db = this.context.openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null);
+        Cursor cursor = db.query(TABLE_TU_VUNG, null, null,
+                null, null, null, null, null);
+        ArrayList<TuVung> dsTuVung = new ArrayList<TuVung>();
+        while (cursor.moveToNext())
+        {
+            TuVung tuVung = new TuVung(
+                    cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3),
+                    cursor.getString(4)
+            );
+            dsTuVung.add(tuVung);
+        }
+        cursor.close();
+        db.close();
+        return dsTuVung;
+    }
+
+    //Get list TuVung by ChuDe
+    public ArrayList<TuVung> getListTuVungByChuDe(int chude_id){
+        db = this.context.openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null);
+        Cursor cursor = db.rawQuery(
+                "SELECT * FROM tuvung where id in (select tuvung_id from tuvungchude where chude_id = " + chude_id +" ) ",null);
+        ArrayList<TuVung> dsTuVung = new ArrayList<>();
+        while (cursor.moveToNext())
+        {
+            TuVung tuVung = new TuVung(
+                    cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3),
+                    cursor.getString(4)
+            );
+            dsTuVung.add(tuVung);
+        }
+        cursor.close();
+        db.close();
+        return dsTuVung;
     }
 
 
