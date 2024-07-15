@@ -4,10 +4,11 @@ import android.app.Activity;
 
 import android.content.Context;
 
-import android.database.Cursor;
+
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
 
 import com.example.fptdictionary.model.TuVung;
 
@@ -52,7 +53,7 @@ public class DBTuVung extends SQLiteOpenHelper{
         db = this.context.openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null);
     }
 
-    //Get all ChuDe
+
     public ArrayList<TuVung> getAllTuVung(){
         db = this.context.openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null);
         Cursor cursor = db.query(TABLE_TU_VUNG, null, null,
@@ -95,5 +96,6 @@ public class DBTuVung extends SQLiteOpenHelper{
         db.close();
         return dsTuVung;
     }
+
 
 }

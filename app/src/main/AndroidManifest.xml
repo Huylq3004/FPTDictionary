@@ -16,8 +16,6 @@
             android:name=".tuvungtienganh.compare"
             android:exported="true" />
         <activity
-            android:name=".tuvungtienganh.MainActivity"
-            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
