@@ -1,9 +1,9 @@
 package com.example.fptdictionary.tuvungtienganh;
 
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -15,14 +15,19 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+
+import com.example.fptdictionary.R;
 import com.example.fptdictionary.adapter.GridAdapter;
 import com.example.fptdictionary.data.DBTuVung;
 import com.example.fptdictionary.model.ChuDe;
 import com.example.fptdictionary.model.TuVung;
+
 
 public class LuyenTap extends AppCompatActivity {
 
@@ -106,6 +111,81 @@ public class LuyenTap extends AppCompatActivity {
         COUNT = dsTuVung.size();
     }
 
+    private void addEvents() {
+        taoTuVung();
+
+        btnKiemTra.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                xuLyKiemTra();
+            }
+        });
+        btnBoQua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                xuLyGoiTuTiepTheo();
+            }
+        });
+        btnTuTiep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                xuLyGoiTuTiepTheo();
+            }
+        });
+
+        btnBackDsTuVung.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (chuDe.getTen() == null)
+                {
+                    Intent intent = new Intent(LuyenTap.this, toanbotu.class);
+                    intent.putExtra("ChuDe", chuDe);
+                    startActivity(intent);
+                }
+                else
+                {
+                    Intent intent = new Intent(LuyenTap.this, danhsachtu.class);
+                    intent.putExtra("ChuDe", chuDe);
+                    startActivity(intent);
+                }
+            }
+        });
+
+        txtNghia.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    Toast.makeText(LuyenTap.this, txtNghia.getText(), Toast.LENGTH_SHORT).show();
+                    xuLyKiemTra();
+                }
+                return false;
+            }
+        });
+
+        btnLamLai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                thucHienLaiTuVung();
+            }
+        });
+
+        swNgauNhien.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(swNgauNhien.isChecked())
+                {
+                    //TODO" --------
+                    Toast.makeText(LuyenTap.this, "Checked", Toast.LENGTH_LONG).show();
+                    flagNgayNhien = true;
+                }
+                else {
+                    flagNgayNhien = false;
+                    Toast.makeText(LuyenTap.this, "false", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
     private void thucHienLaiTuVung() {
         //TODO:
         dsGoiY.clear();
@@ -159,4 +239,35 @@ public class LuyenTap extends AppCompatActivity {
         txtNghia.requestFocus();
     }
 
+    private void xuLyGoiTuTiepTheo() {
+        //TODO: gọi từ tiếp theo trong list
+        taoTuVung();
+        btnBoQua.setVisibility(View.VISIBLE);
+        btnKiemTra.setVisibility(View.VISIBLE);
+        btnTuTiep.setVisibility(View.GONE);
+        btnLamLai.setVisibility(View.GONE);
+        txtInform.setVisibility(View.INVISIBLE);
+    }
+
+    private void xuLyKiemTra() {
+        // Nếu Đúng hiển thị thông báo, hiện nút next
+        String nghia = txtNghia.getText().toString();
+        if(nghia.equalsIgnoreCase(DATATU))
+        {
+            txtInform.setText("Chính xác!!");
+            txtInform.setBackgroundColor(Color.GREEN);
+            txtInform.setVisibility(View.VISIBLE);
+
+            btnBoQua.setVisibility(View.GONE);
+            btnKiemTra.setVisibility(View.GONE);
+            btnTuTiep.setVisibility(View.VISIBLE);
+            btnLamLai.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            txtInform.setText("Không chính xác!!");
+            txtInform.setBackgroundColor(Color.RED);
+            txtInform.setVisibility(View.VISIBLE);
+        }
+    }
 }

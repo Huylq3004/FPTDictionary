@@ -13,15 +13,17 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+
+import com.example.fptdictionary.R;
+import com.example.fptdictionary.data.DBTuVung;
+import com.example.fptdictionary.model.ChuDe;
+import com.example.fptdictionary.tuvungtienganh.danhsachtu;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import education.app.data.DBTuVung;
-import education.app.model.ChuDe;
-import education.app.model.TuVung;
-import education.app.tuvungtienganh.danhsachtu;
-import education.app.tuvungtienganh.R;
+
 
 public class CateAdapter extends ArrayAdapter<ChuDe> {
 

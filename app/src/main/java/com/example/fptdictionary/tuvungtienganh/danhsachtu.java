@@ -1,11 +1,12 @@
 package com.example.fptdictionary.tuvungtienganh;
 
+import static android.content.Intent.getIntent;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,12 +20,16 @@ import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.fptdictionary.R;
+import com.example.fptdictionary.adapter.TuVungAdapter;
+import com.example.fptdictionary.data.DBTuVung;
+import com.example.fptdictionary.model.API.TuVung;
+import com.example.fptdictionary.model.ChuDe;
+
 import java.util.ArrayList;
 
-import education.app.adapter.TuVungAdapter;
-import education.app.data.DBTuVung;
-import education.app.model.ChuDe;
-import education.app.model.TuVung;
 
 public class danhsachtu extends AppCompatActivity {
 

@@ -7,9 +7,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 
+import com.example.fptdictionary.R;
+
 import java.util.List;
 
-import education.app.tuvungtienganh.R;
+
 
 public class GridAdapter extends ArrayAdapter {
 
